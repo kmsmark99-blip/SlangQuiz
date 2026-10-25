@@ -21,22 +21,36 @@ Google Gemini API와 Streamlit, SQLite를 활용하여 제작된 **실시간 신
 
 ```text
 slangQuiz/
-├── app.py                  # Streamlit 메인 실행 파일
-├── config.py               # 프로젝트 설정 및 환경 변수 로더
-├── requirements.txt        # 필요 라이브러리 목록
-├── README.md               # 프로젝트 사용 설명서
-├── .gitignore              # Git 제외 설정 파일
+├── app.py                     # Streamlit 메인 실행 파일
+├── config.py                  # 프로젝트 설정 및 환경 변수 로더
+├── requirements.txt           # 필요 라이브러리 목록
+├── README.md                  # 프로젝트 사용 설명서
+├── .gitignore                 # Git 제외 설정 파일
+├── check_models.py            # Gemini API 사용 가능 모델 조회 스크립트
+├── data/
+│   └── sample_questions.json  # 퀴즈 샘플 데이터
 ├── database/
-│   ├── db.py               # SQLite 트랜잭션 및 데이터 처리 로직
-│   └── schema.sql          # 데이터베이스 테이블 정의 SQL
+│   ├── db.py                  # SQLite 트랜잭션 및 데이터 처리 로직
+│   ├── db_manager.py          # DB 연결 및 관리 로직
+│   └── schema.sql             # 데이터베이스 테이블 정의 SQL
 ├── services/
-│   ├── quiz_generator.py   # Gemini API 문제 생성 서비스
-│   └── feedback_generator.py # Gemini AI 맞춤 피드백 생성 서비스
+│   ├── quiz_generator.py      # Gemini API 문제 생성 서비스
+│   ├── feedback_generator.py  # Gemini AI 맞춤 피드백 생성 서비스
+│   ├── ranking_service.py     # 사용자 랭킹 서비스
+│   └── statistics_service.py  # 통계 데이터 처리 서비스
 ├── models/
-│   └── question.py         # Pydantic 기반 퀴즈 데이터 모델
+│   ├── question.py            # Pydantic 기반 퀴즈 데이터 모델
+│   ├── answer_log.py          # 정/오답 기록 모델
+│   ├── record.py              # 사용자 기록 모델
+│   └── user.py                # 사용자 프로필 모델
+├── static/
+│   └── css/
+│       └── style.css          # 커스텀 스타일시트
 ├── utils/
-│   └── validator.py        # 문제 데이터 유효성 검증기
+│   ├── quiz_logic.py          # 퀴즈 진행 및 계산 로직
+│   └── validator.py           # 문제 데이터 유효성 검증기
 └── tests/
-    ├── conftest.py         # pytest 모듈 경로 등록 파일
-    ├── test_quiz_logic.py  # 퀴즈 모델 및 기본 로직 단위 테스트
-    └── test_validator.py   # 유효성 검증 단위 테스트
+    ├── test_quiz_logic.py     # 퀴즈 모델 및 기본 로직 단위 테스트
+    ├── test_records.py        # 기록 저장 단위 테스트
+    ├── test_statistics.py     # 통계 기능 단위 테스트
+    └── test_validator.py      # 유효성 검증 단위 테스트
